@@ -1,0 +1,21 @@
+metadatainfo.py:
+    Add definition for specifiying metadata for streams without specifiying index
+        e.g. -metadata:s:a title="blob"
+        - Change definition of dictionary to be Info or list of Info
+    Add common functions like title, language
+    Document
+bitrateinfo.py:
+    Add support for -b:a 192k like commands     x
+    Add support for -b:a:0 192k like commands   x
+    Add support for crf                         x
+    Document
+codecinfo.py:
+    Refactor like metadainfo and bitrateinfo
+    Document
+
+Features
+Add support for filters
+Refactored the way mapping works
+Add audio channel support
+Add support for specifiying time (i.e. start time, duration)
+Add basic runner
