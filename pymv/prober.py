@@ -1,5 +1,5 @@
 from pymv.ffcommand import ffcommand
-from pymv.proberesult import ProbeResult
+from pymv.probe.proberesult import ProbeResult
 import os
 import subprocess
 import json
