@@ -39,12 +39,12 @@ class metadatainfo(ffcommand):
         if self.base_data is not None:
             for inf in self.base_data:
                 args.append('-metadata')
-                args.append("{0}='{1}'".format(inf.key, inf.value))
+                args.append("{0}={1}".format(inf.key, inf.value))
         if self.stream_data is not None:
             for stype in self.stream_data.keys():
                 for value in self.stream_data[stype]:
                     args.append('-metadata:s:{0}:{1}'.format(stype.get_stream_qualifier(), value.index))
-                    args.append("{0}='{1}'".format(value.info.key, value.info.value))
+                    args.append("{0}={1}".format(value.info.key, value.info.value))
         return args
 
 

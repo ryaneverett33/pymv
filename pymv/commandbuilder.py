@@ -21,8 +21,11 @@ class commandbuilder:
         self.metadata_info = metadatainfo()
         self.otheroptions = list()
 
-    def get_executable(self):
+    def get_ffmpeg(self):
         return "ffmpeg"
+
+    def get_ffprobe(self):
+        return "ffprobe"
 
     def get_arguments(self):
         arguments = []

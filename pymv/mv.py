@@ -1,10 +1,14 @@
 from pymv.fmap import fmap
 from pymv.commandbuilder import commandbuilder
 from pymv.runner import runner
+from pymv.prober import prober
 
 class mv(commandbuilder):
+    prober = None
+
     def __init__(self):
         super().__init__()
+        self.prober = prober(self.get_ffprobe())
 
     def Input(self, filename):
         self.inputs.append(filename)
@@ -47,6 +51,10 @@ class mv(commandbuilder):
         self.otheroptions.append(timecode)
         return self
 
+    def add_command(self, value):
+        self.otheroptions.append(value)
+        return self
+
     def get_command(self):
         arguments = self.get_arguments()
         command = self.get_executable() + ' '
@@ -56,6 +64,9 @@ class mv(commandbuilder):
                 command = command + ' '
         return command
 
+    def probe(self, filename):
+        return self.prober.probe(filename)
+
     def run(self):
-        run = runner(self.get_arguments(), self.get_executable())
+        run = runner(self.get_arguments(), self.get_ffmpeg())
         run.run()
