@@ -67,6 +67,21 @@ class mv(commandbuilder):
     def probe(self, filename):
         return self.prober.probe(filename)
 
+    def Input(self):
+        return self.input_info
+
+    def Output(self):
+        return self.output_info
+
+    def Video(self):
+        return self.video_info
+
+    def Audio(self):
+        return self.audio_info
+
+    def Subtitle(self):
+        return self.subtitle_info
+
     def run(self):
         run = runner(self.get_arguments(), self.get_ffmpeg())
         run.run()

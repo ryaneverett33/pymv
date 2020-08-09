@@ -10,6 +10,10 @@ class commandbuilder:
     codec_info = None
     bitrate_info = None
     metadata_info = None
+    input_info = None
+    video_info = None
+    audio_info = None
+    subtitle_info = None
     videooptions = None
     otheroptions = None
 
