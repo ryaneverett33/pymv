@@ -1,12 +1,11 @@
 import sys
-sys.path.insert(1, '../pymv')
-from pymv import mv
+sys.path.insert(0, '../')
+from pymv.mv import Mv
 
-mov = mv()
-mov.Input('filename.mkv') \
-.Map(0,0).Map(0,1)
-# mov.Codec().Copy()
-mov.Codec().Video('copy') \
-.Audio('copy')
-mov.Output('test.mkv') \
-.run()
+mov = Mv()
+mov.Input('filename.mkv')
+mov.Map(0,0).Map(0,1)
+mov.Video.Codec('copy')
+mov.Audio.Codec('copy')
+mov.Output('test.mkv')
+mov.run()

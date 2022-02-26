@@ -69,6 +69,7 @@ class Mv(CommandBuilder, BaseObj, MetadataObj):
 
     def get_command(self) -> Mv:
         arguments = self._get_arguments()
+        arguments = [str(argument) for argument in arguments]
         return self._ffmpeg_path + " " + " ".join(arguments)
 
     def run(self, capture_stdout=False, capture_stderr=False) -> tuple:

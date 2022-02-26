@@ -11,14 +11,22 @@ class VideoObj(BaseObj):
     def __init__(self, mov_obj : CommandBuilder):
         super().__init__(mov_obj)
 
-    def Maxrate(self, rate: int) -> VideoObj:
-        self.__parent.add_command(('-maxrate', str(rate)))
+    def Maxrate(self, rate: Union[int, str]) -> VideoObj:
+        self._parent.add_command(('-maxrate', rate))
         return self
 
-    def Minrate(self, rate: int) -> VideoObj:
-        self.__parent.add_command(('-minrate', str(rate)))
+    def Minrate(self, rate: Union[int, str]) -> VideoObj:
+        self._parent.add_command(('-minrate', rate))
         return self
 
-    def Bufsize(self, buffer: str) -> VideoObj:
-        self.__parent.add_command(('-bufsize', buffer))
+    def Bufsize(self, size: str) -> VideoObj:
+        self._parent.add_command(('-bufsize', size))
+        return self
+
+    def Crf(self, rate: Union[int, float]) -> VideoObj:
+        self._parent.add_command(('-crf', rate))
+        return self
+
+    def Preset(self, preset: str) -> VideoObj:
+        self._parent.add_command(('-preset', preset))
         return self

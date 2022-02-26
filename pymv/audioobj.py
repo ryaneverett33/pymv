@@ -13,7 +13,7 @@ class AudioObj(BaseObj):
 
     def Channels(self, numOfChannels: int, streamIndex=-1) -> AudioObj:
         if streamIndex != -1:
-            self.__parent.add_command((f'-ac:{streamIndex}', numOfChannels))
+            self._parent.add_command((f'-ac:{streamIndex}', numOfChannels))
         else:
-            self.__parent.add_command(('-ac', numOfChannels))
+            self._parent.add_command(('-ac', numOfChannels))
         return self

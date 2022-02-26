@@ -1,12 +1,9 @@
 import sys
-sys.path.insert(1, '../pymv')
-from pymv import mv
+sys.path.insert(1, '../')
+from pymv.mv import Mv
 
-mov = mv()
-result = mov.probe('C:\\Users\\ryane\\Downloads\\Spider-Man.Into.the.Spider-Verse.2018.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT.mkv')
-print(result.format.filename)
-print(result.format.size_str())
+mov = Mv()
+result = mov.Probe.probe('filename.mkv')
+print(f"Filename: {result.format.filename}, size: {result.format.size_str()}")
 duration = result.format.duration_obj()
-print(duration)
-print(duration.minute)
-print(duration.second)
+print(f"Duration timecode: {duration}, minute segment: {duration.minute}, second segment: {duration.second}")
