@@ -1,77 +1,59 @@
-from pymv.fmap import fmap
-from pymv.codecinfo import codecinfo
-from pymv.bitrateinfo import bitrateinfo
-from pymv.metadatainfo import metadatainfo
+import warnings
+import typing
 
-class commandbuilder:
+class CommandBuilder:
     inputs = None
     outputs = None
-    mapping = None
-    codec_info = None
-    bitrate_info = None
-    metadata_info = None
-    input_info = None
-    video_info = None
-    audio_info = None
-    subtitle_info = None
-    videooptions = None
-    otheroptions = None
+    commands : typing.List[tuple] = None
+    initial_commands : typing.List[tuple] = None
+    _ffmpeg_path : str = None
+    _ffprobe_path : str = None       
 
-    def __init__(self):
+
+    def __init__(self, ffmpeg_path="ffmpeg", ffprobe_path="ffprobe"):
         self.inputs = []
         self.outputs = []
-        self.codec_info = codecinfo()
-        self.bitrate_info = bitrateinfo()
-        self.metadata_info = metadatainfo()
-        self.otheroptions = list()
+        self._ffmpeg_path = ffmpeg_path
+        self._ffprobe_path = ffprobe_path
 
-    def get_ffmpeg(self):
-        return "ffmpeg"
+        self.commands = list()
+        self.initial_commands = list()
 
-    def get_ffprobe(self):
-        return "ffprobe"
+    def add_command(self, command: tuple, initial_command=False):
+        if initial_command:
+            self.initial_commands.append(command)
+        else:
+            self.commands.append(command)
 
-    def get_arguments(self):
+    def _get_arguments(self):
         arguments = []
-        # assemble inputs
-        if self.inputs is not None:
-            for filename in self.inputs:
-                arguments.append('-i')
-                arguments.append("{0}".format(filename))
-        else:
-            raise Exception('No inputs specified!')
-
-        # assemble mappings
-        if self.mapping is not None:
-            if isinstance(self.mapping, fmap):
-                arguments.extend(self.mapping.to_args())
+        # Error check
+        if self.inputs is None:
+            raise Exception("No Inputs given!")
+        if self.outputs is None:
+            raise Exception("No Outputs given!")
+        # assemble initial options
+        for initial_command in self.initial_commands:
+            if isinstance(initial_command, tuple):
+                arguments = arguments + list(initial_command)
+            elif isinstance(initial_command, str):
+                arguments.append(initial_command)
             else:
-                for maps in self.mapping:
-                    arguments.extend(maps.to_args())
-
-        # assemble codecs
-        if self.codec_info is not None:
-            codec_args = self.codec_info.to_args()
-            arguments.extend(codec_args)
-        
-        # assemble bitrates
-        if self.bitrate_info is not None:
-            bitrate_args = self.bitrate_info.to_args()
-            arguments.extend(bitrate_args)
-
-        # assemble metadata
-        if self.metadata_info is not None:
-            metadata_args = self.metadata_info.to_args()
-            arguments.extend(metadata_args)
-
-        # assemble other options
-        if len(self.otheroptions) != 0:
-            arguments.extend(self.otheroptions)
-
+                raise TypeError(f"Unsupported comand type: {type(initial_command)}")
+        # assemble input
+        for input in self.inputs:
+            arguments.append('-i')
+            arguments.append(input)
+        # assemble options
+        for command in self.commands:
+            if isinstance(command, tuple):
+                arguments = arguments + list(command)
+            elif isinstance(command, str):
+                arguments.append(command)
+            else:
+                raise TypeError(f"Unsupported comand type: {type(command)}")
         # assemble outputs
-        if self.outputs is not None:
-            for filename in self.outputs:
-                arguments.append("{0}".format(filename))
-        else:
-            raise Exception('No outputs specified!')
+        for output in self.outputs:
+            # Use a loop body because we may need to process outputs more smart later
+            arguments.append(output)
         return arguments

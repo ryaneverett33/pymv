@@ -1,14 +1,12 @@
-from pymv.ffcommand import ffcommand
-from pymv.probe.proberesult import ProbeResult
+from pymv.proberesult import ProbeResult
 import os
 import subprocess
 import json
 
-class prober(ffcommand):
+class prober():
     executable = None
 
     def __init__(self, executable):
-        super().__init__()
         self.executable = executable
 
     def probe(self, filename):

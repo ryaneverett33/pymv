@@ -9,7 +9,10 @@ class runner():
         self.arguments = arguments
         self.executable = executable
 
-    def run(self):
+    # Return a tuple of returncode, stdout (if captured), and stderr (if captured)
+    def run(self, capture_stdout=False, capture_stderr=False) -> tuple:
         argCopy = [self.executable]
         argCopy.extend(self.arguments)
-        subprocess.run(argCopy, stdout=sys.stdout)
+        process = subprocess.run(argCopy, stdout=subprocess.PIPE if capture_stdout else sys.stdout,
+                                stderr=subprocess.PIPE if capture_stderr else sys.stderr)
+        return process.returncode, process.stdout, process.stderr
