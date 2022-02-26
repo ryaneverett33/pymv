@@ -1,20 +1,6 @@
 # TODO
-- Change Codec.Audio\Codec.Video -> Audio.Codec and Video.Codec
-- Change mov("input") -> Input()
-- Add Input()
-    - Input.Codec() # for hwaccel format
-- Add Audio.Channels()
-- Add Options()
-    - Options.hwaccel()
-    - Options.genpts()
-    - Options.overwrite()
+- Rewrite tests
 - Add Queue()
-    - OnStart
-    - OnFinished
-    - OnProgress
-    - Queue.Functions # Can be given to either OnStart, OnFinished, OnProgress
-        - Shutdown()
-        - Sleep()
-        - Hibernate()
-        - Logout()
-        - RunProgram()
+    - OnStart delegate
+    - OnFinished delegate
+    - OnProgress delegate
