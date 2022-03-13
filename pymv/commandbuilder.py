@@ -2,24 +2,19 @@ import warnings
 import typing
 
 class CommandBuilder:
-    inputs = None
-    outputs = None
-    commands : typing.List[tuple] = None
-    initial_commands : typing.List[tuple] = None
-    _ffmpeg_path : str = None
-    _ffprobe_path : str = None       
+    def __init__(self, ffmpeg_path: str="ffmpeg", ffprobe_path: str="ffprobe"):
+        self.inputs: typing.List[str] = []
+        self.outputs: typing.List[str] = []
+        self._ffmpeg_path: str = ffmpeg_path
+        self._ffprobe_path: str = ffprobe_path
 
+        self.commands: typing.List[tuple] = list()
+        self.initial_commands: typing.List[tuple] = list()
 
-    def __init__(self, ffmpeg_path="ffmpeg", ffprobe_path="ffprobe"):
-        self.inputs = []
-        self.outputs = []
-        self._ffmpeg_path = ffmpeg_path
-        self._ffprobe_path = ffprobe_path
-
-        self.commands = list()
-        self.initial_commands = list()
-
-    def add_command(self, command: tuple, initial_command=False):
+    def add_command(self, command: tuple, initial_command: bool=False):
+        for item in command:
+            if not isinstance(item, str):
+                raise TypeError("Command tuple must only contain strings")
         if initial_command:
             self.initial_commands.append(command)
         else:

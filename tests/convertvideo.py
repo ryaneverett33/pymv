@@ -10,12 +10,12 @@ mov.Input('filename.mkv') \
     .Video.Codec('h264') \
         .Crf(18) \
         .Preset('fast')
-mov.Audio.Codec('ac3', streamIndex=0) \
-        .Codec('aac', streamIndex=1) \
-        .Bitrate('512k', streamIndex=0) \
-        .Bitrate('192k', streamIndex=1) \
-        .Metadata.Title('Surround', streamIndex=0) \
-            .Title('Stereo', streamIndex=1)
+mov.Audio.Codec('ac3', stream_specifier=0) \
+        .Codec('aac', stream_specifier=1) \
+        .Bitrate('512k', stream_specifier=0) \
+        .Bitrate('192k', stream_specifier=1) \
+        .Metadata.Title('Surround', stream_specifier=0) \
+            .Title('Stereo', stream_specifier=1)
 mov.Metadata.Title('ConvertVideoTestOut')
 mov.Output('output.mkv')
-print(mov.get_command())
+mov.print_command()

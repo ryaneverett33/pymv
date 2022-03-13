@@ -6,7 +6,7 @@ from pymv.baseobj import BaseObj
 from pymv.commandbuilder import CommandBuilder
 
 class SubtitleObj(BaseObj):
-    _streamType = StreamType.Subtitle
-
     def __init__(self, mov_obj : CommandBuilder):
+        self._streamType = StreamType.Subtitle
+
         super().__init__(mov_obj)

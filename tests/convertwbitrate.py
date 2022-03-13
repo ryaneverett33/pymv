@@ -7,10 +7,10 @@ mov.Input('filename.mkv') \
     .MapAll() \
     .Video.Codec('h264') \
         .Bitrate('1M')
-mov.Audio.Codec('ac3', streamIndex=0) \
-    .Codec('aac', streamIndex=1) \
-    .Channels(2, streamIndex=1) \
-    .Bitrate('512k', streamIndex=0) \
-    .Bitrate('192k', streamIndex=1)
+mov.Audio.Codec('ac3', stream_specifier=0) \
+    .Codec('aac', stream_specifier=1) \
+    .Channels(2, stream_specifier=1) \
+    .Bitrate('512k', stream_specifier=0) \
+    .Bitrate('192k', stream_specifier=1)
 mov.Output('output.mkv')
-print(mov.get_command())
+mov.print_command()

@@ -26,8 +26,8 @@ class codecinfo(ffcommand):
         self.copy = True
         return self
     
-    def Video(self, codec, streamIndex=None):
-        if streamIndex is None:
+    def Video(self, codec, stream_specifier=None):
+        if stream_specifier is None:
             if self.videocodecs is not None:
                 if isinstance(self.videocodecs, list):
                     raise Exception('Setting video codec without stream index would overwrite previous codec mappings')
@@ -40,11 +40,11 @@ class codecinfo(ffcommand):
             if isinstance(self.videocodecs, str):
                 raise Exception('Setting video codec would overwrite previous codec entry')
             else:
-                self.__add_codec(videocodec=Codec(streamIndex, codec))
+                self.__add_codec(videocodec=Codec(stream_specifier, codec))
         return self
 
-    def Audio(self, codec, streamIndex=None):
-        if streamIndex is None:
+    def Audio(self, codec, stream_specifier=None):
+        if stream_specifier is None:
             if self.audiocodecs is not None:
                 if isinstance(self.audiocodecs, list):
                     raise Exception('Setting audio codec without stream index would overwrite previous codec mappings')
@@ -57,11 +57,11 @@ class codecinfo(ffcommand):
             if isinstance(self.audiocodecs, str):
                 raise Exception('Setting audio codec would overwrite previous codec entry')
             else:
-                self.__add_codec(audiocodec=Codec(streamIndex, codec))
+                self.__add_codec(audiocodec=Codec(stream_specifier, codec))
         return self
 
-    def Subtitle(self, codec, streamIndex=None):
-        if streamIndex is None:
+    def Subtitle(self, codec, stream_specifier=None):
+        if stream_specifier is None:
             if self.subtitlecodecs is not None:
                 if isinstance(self.subtitlecodecs, list):
                     raise Exception('Setting subtitle codec without stream index would overwrite previous codec mappings')
@@ -74,7 +74,7 @@ class codecinfo(ffcommand):
             if isinstance(self.subtitlecodecs, str):
                 raise Exception('Setting subtitle codec would overwrite previous codec entry')
             else:
-                self.__add_codec(subtitlecodec=Codec(streamIndex, codec))
+                self.__add_codec(subtitlecodec=Codec(stream_specifier, codec))
         return self
 
     def to_args(self):

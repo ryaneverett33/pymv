@@ -5,12 +5,9 @@ from pymv.commandbuilder import CommandBuilder
 from pymv.hwAccelMethod import HwAccelMethod
 
 class OptionsObj:
-    __builder : CommandBuilder = None
-    __options_flags : dict = None
-
     def __init__(self, builder : OptionsObj):
-        self.__builder = builder
-        self.__options_flags = dict()
+        self.__builder: CommandBuilder = builder
+        self.__options_flags: typing.Dict[str, bool] = dict()
 
     def Duration(self, duration : str) -> OptionsObj:
         # TODO make duration a timecode object

@@ -6,9 +6,9 @@ from pymv.baseobj import BaseObj
 from pymv.commandbuilder import CommandBuilder
 
 class VideoObj(BaseObj):
-    _streamType = StreamType.Video     # Use for distinction in base class
-
     def __init__(self, mov_obj : CommandBuilder):
+        self._streamType = StreamType.Video     # Use for distinction in base class
+        
         super().__init__(mov_obj)
 
     def Maxrate(self, rate: Union[int, str]) -> VideoObj:

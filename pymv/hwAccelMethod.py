@@ -11,7 +11,7 @@ class HwAccelMethod(Enum):
     videotoolbox = 64
     Unknown = 8
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.value == 'cuda':
             return 'cuda'
         elif self.value == 'cuvid':

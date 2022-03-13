@@ -14,23 +14,23 @@ class metadatainfo(ffcommand):
         self.base_data.append(Info(key, value))
         return self
 
-    def Video(self, key, value, streamIndex=None):
-        return self.set_value_of_stream(key, value, StreamType.Video, streamIndex)
+    def Video(self, key, value, stream_specifier=None):
+        return self.set_value_of_stream(key, value, StreamType.Video, stream_specifier)
 
-    def Audio(self, key, value, streamIndex=None):
-        return self.set_value_of_stream(key, value, StreamType.Audio, streamIndex)
+    def Audio(self, key, value, stream_specifier=None):
+        return self.set_value_of_stream(key, value, StreamType.Audio, stream_specifier)
 
-    def Subtitle(self, key, value, streamIndex=None):
-        return self.set_value_of_stream(key, value, StreamType.Subtitle, streamIndex)
+    def Subtitle(self, key, value, stream_specifier=None):
+        return self.set_value_of_stream(key, value, StreamType.Subtitle, stream_specifier)
 
-    def set_value_of_stream(self, key, value, streamType, streamIndex):
-        if streamType is None or streamIndex is None:
-            raise AttributeError('streamType or streamIndex attributes not given')
-        if not isinstance(streamType, StreamType) or not isinstance(streamIndex, int):
-            raise AttributeError('streamType must be a StreamType enum and streamIndex must be an int')
+    def set_value_of_stream(self, key, value, streamType, stream_specifier):
+        if streamType is None or stream_specifier is None:
+            raise AttributeError('streamType or stream_specifier attributes not given')
+        if not isinstance(streamType, StreamType) or not isinstance(stream_specifier, int):
+            raise AttributeError('streamType must be a StreamType enum and stream_specifier must be an int')
         if streamType not in self.stream_data:
             self.stream_data[streamType] = list()
-        self.stream_data[streamType].append(StreamValue(streamIndex, Info(key, value)))
+        self.stream_data[streamType].append(StreamValue(stream_specifier, Info(key, value)))
         sorted(self.stream_data[streamType], key=lambda value: value.index)
         return self
 

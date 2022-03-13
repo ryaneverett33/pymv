@@ -1,10 +1,8 @@
-from __future__ import annotations
-from lib2to3.pytree import Base  # needed for -> Mv
+from __future__ import annotations # needed for -> Mv
 
 import warnings
 import typing
 
-from pymv.proberesult import ProbeResult
 from .streamType import StreamType
 from .commandbuilder import CommandBuilder
 from .runner import runner
@@ -18,31 +16,22 @@ from .optionsobj import OptionsObj
 from .baseobj import BaseObj
 
 class Mv(CommandBuilder, BaseObj, MetadataObj):
-    Probe = None
-    Lookup = None
-    Video = None
-    Audio = None
-    Subtitle = None
-    Metadata = None
-    HwAccel = None
-    Options = None
-
     def __init__(self, ffmpeg_path="ffmpeg", ffprobe_path="ffprobe"):
         CommandBuilder.__init__(self, ffmpeg_path=ffmpeg_path, ffprobe_path=ffprobe_path)
         BaseObj.__init__(self, self)
-        self.Probe = prober(self._ffprobe_path)
-        self.Lookup = Lookup()
-        self.Video = VideoObj(self)
-        self.Audio = AudioObj(self)
-        self.Subtitle = SubtitleObj(self)
-        self.Metadata = MetadataObj(self)
-        self.Options = OptionsObj(self)
+        self.Probe: prober = prober(self._ffprobe_path)
+        self.Lookup: Lookup = Lookup()
+        self.Video: VideoObj = VideoObj(self)
+        self.Audio: AudioObj = AudioObj(self)
+        self.Subtitle: SubtitleObj = SubtitleObj(self)
+        self.Metadata: MetadataObj = MetadataObj(self)
+        self.Options: OptionsObj = OptionsObj(self)
 
-    def Input(self, filename) -> Mv:
+    def Input(self, filename: str) -> Mv:
         self.inputs.append(filename)
         return self
 
-    def Output(self, filename) -> Mv:
+    def Output(self, filename: str) -> Mv:
         self.outputs.append(filename)
         return self
 
@@ -67,11 +56,15 @@ class Mv(CommandBuilder, BaseObj, MetadataObj):
     def MapAll(self) -> Mv:
         return self.Map(0)
 
-    def get_command(self) -> Mv:
+    def get_command(self) -> str:
         arguments = self._get_arguments()
         arguments = [str(argument) for argument in arguments]
         return self._ffmpeg_path + " " + " ".join(arguments)
 
-    def run(self, capture_stdout=False, capture_stderr=False) -> tuple:
+    def print_command(self) -> Mv:
+        print(self.get_command())
+        return self
+
+    def Run(self, capture_stdout: bool=False, capture_stderr: bool=False) -> typing.Tuple[int, str, str]:
         run = runner(self._get_arguments(), self._ffmpeg_path)
         return run.run(capture_stdout=capture_stdout, capture_stderr=capture_stderr)

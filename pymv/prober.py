@@ -1,15 +1,13 @@
-from pymv.proberesult import ProbeResult
+from pymv.probe.proberesult import ProbeResult
 import os
 import subprocess
 import json
 
 class prober():
-    executable = None
+    def __init__(self, executable: str="ffprobe"):
+        self.executable: str = executable
 
-    def __init__(self, executable):
-        self.executable = executable
-
-    def probe(self, filename):
+    def probe(self, filename: str):
         if not os.path.isfile(filename):
             raise Exception("File does not exist")
         args = [self.executable, '-v', 'quiet', '-print_format', 'json',

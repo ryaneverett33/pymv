@@ -1,6 +1,6 @@
-from pymv.chapterresult import ChapterResult
-from pymv.streamresult import StreamResult
-from pymv.format import Format
+from .chapterresult import ChapterResult
+from .streamresult import StreamResult
+from .format import Format
 
 class ProbeResult:
     raw_json = None     # The orginal json object to create the object
@@ -32,5 +32,3 @@ class ProbeResult:
     def _parse_chapters(self, raw_chapters):
         for chapter in raw_chapters:
             self.chapters.append(ChapterResult(chapter))
-
-    
