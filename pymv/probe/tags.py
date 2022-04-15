@@ -1,22 +1,22 @@
+from __future__ import annotations
 import typing
 
-class Tags:
-    raw_tag_obj = None
-    _dict = None
-
-    def __init__(self, tag_obj):
-        self.raw_tag_obj = tag_obj
-        self._dict = dict()
-        for key in tag_obj.keys():
-            self._dict[key] = tag_obj[key]
+class Tags(dict):
+    def __init__(self, tag_obj: dict):
+        super().__init__(tag_obj)
 
     def __getitem__(self, key: str) -> typing.Any:
-        if key in self._dict:
-            return self._dict[key]
+        if key in self:
+            return super().__getitem__(key)
         return None
 
     def title(self) -> str:
-        return self._getter('title')
+        return self['title']
 
     def language(self) -> str:
         return self['language']
+
+    def _print_debug(self):
+        print("Tags:")
+        for tag in self.keys():
+            print(f"\t{tag} = {self[tag]}")

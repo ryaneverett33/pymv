@@ -1,29 +1,25 @@
+import typing
+
 from .chapterresult import ChapterResult
 from .streamresult import StreamResult
-from .format import Format
+from .formatinfo import Format
 
 class ProbeResult:
-    raw_json = None     # The orginal json object to create the object
-    streams = None      # Array of StreamResult objects
-    chapters = None     # Array of ChapterResult objects
-    format = None       # Format object or None
-
-    def __init__(self, jsonobj):
-        if jsonobj is None:
+    def __init__(self, json_result: dict):
+        if json_result is None:
             raise AttributeError("jsonobj is None")
-        self.raw_json = jsonobj
-        raw_streams = jsonobj["streams"]
-        raw_chapters = jsonobj['chapters']
-        raw_format = jsonobj['format']
 
-        if raw_streams is not None:
-            self.streams = []
-            self._parse_streams(raw_streams)
-        if raw_chapters is not None:
-            self.chapters = []
-            self._parse_chapters(raw_chapters)
-        if raw_format is not None:
-            self.format = Format(raw_format)
+        self._raw_json:dict = json_result
+        self.streams:typing.List[StreamResult] = []
+        self.chapters:typing.List[ChapterResult] = []
+        self.format:Format = None
+
+        if json_result["streams"] is not None:
+            self._parse_streams(json_result["streams"])
+        if json_result["chapters"] is not None:
+            self._parse_chapters(json_result["chapters"])
+        if json_result["format"] is not None:
+            self.format = Format(json_result["format"])
 
     def _parse_streams(self, raw_streams):
         for stream in raw_streams:

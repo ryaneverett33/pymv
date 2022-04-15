@@ -4,6 +4,10 @@ from pymv.mv import Mv
 
 mov = Mv()
 result = mov.Probe.probe('filename.mkv')
-print(f"Filename: {result.format.filename}, size: {result.format.size_str()}")
-duration = result.format.duration_obj()
-print(f"Duration timecode: {duration}, minute segment: {duration.minute}, second segment: {duration.second}")
+print(result.format.get_duration())
+print(result.format.get_size())
+result.format._print_debug()
+for chapter in result.chapters:
+    chapter._print_debug()
+for stream in result.streams:
+    stream._print_debug()
