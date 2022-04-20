@@ -15,7 +15,7 @@ mov.Video.Codec('copy')
 mov.Audio.Codec('aac') \
     .Channels(2)
 mov.Output('test.mkv')
-mov.run()
+mov.Run()
 ```
 
 ### More examples
