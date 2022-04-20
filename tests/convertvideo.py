@@ -1,8 +1,8 @@
 import sys
 sys.path.insert(0, '../')
-from pymv.mv import Mv
+from pymv import Pymv
 
-mov = Mv()
+mov = Pymv()
 mov.Input('filename.mkv') \
     .Map(0, 0) \
     .Map(0, 1) \

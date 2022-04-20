@@ -6,9 +6,9 @@ A basic wrapper library for the ffmpeg CLI tool.
 
 This is a very basic example taking an input file (filename.mkv), selecting the streams for use, setting codec information, and finally running the command producing the output file (test.mkv).
 ```python
-from pymv.mv import Mv
+from pymv import Pymv
 
-mov = Mv()
+mov = Pymv()
 mov.Input('filename.mkv') \
     .Map(0,0).Map(0,1)
 mov.Video.Codec('copy')

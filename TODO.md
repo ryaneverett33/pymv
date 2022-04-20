@@ -1,11 +1,10 @@
 # TODO
-- Rename Mv to something not terrible
-    - maybe just pymv?
 - Add comments for functions
 - Add useful examples
 - Figure out a way to add plugins
     - maybe http://yapsy.sourceforge.net/
     - maybe https://github.com/tmr232/python-extension-methods
+- Fix stream specification
 - Add Queue plugin
     - OnStart delegate
     - OnFinished delegate

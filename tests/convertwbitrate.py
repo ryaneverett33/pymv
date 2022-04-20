@@ -1,8 +1,8 @@
 import sys
 sys.path.insert(1, '../')
-from pymv.mv import Mv
+from pymv import Pymv
 
-mov = Mv()
+mov = Pymv()
 mov.Input('filename.mkv') \
     .MapAll() \
     .Video.Codec('h264') \

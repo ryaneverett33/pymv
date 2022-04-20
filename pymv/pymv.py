@@ -16,7 +16,7 @@ from .optionsobj import OptionsObj
 from .baseobj import BaseObj
 from .inputobj import InputObj
 
-class Mv(CommandBuilder, BaseObj, MetadataObj):
+class Pymv(CommandBuilder, BaseObj, MetadataObj):
     def __init__(self, ffmpeg_path="ffmpeg", ffprobe_path="ffprobe"):
         CommandBuilder.__init__(self, ffmpeg_path=ffmpeg_path, ffprobe_path=ffprobe_path)
         BaseObj.__init__(self, self)

@@ -1,8 +1,8 @@
 import sys
 sys.path.insert(1, '../')
-from pymv.mv import Mv
+from pymv import Pymv
 
-mov = Mv()
+mov = Pymv()
 result = mov.Probe.probe('filename.mkv')
 print(result.format.get_duration())
 print(result.format.get_size())

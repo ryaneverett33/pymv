@@ -24,7 +24,7 @@ class VideoObj(BaseObj):
         return self
 
     def Crf(self, rate: Union[int, float]) -> VideoObj:
-        self._parent.add_command(('-crf', rate))
+        self._parent.add_command(('-crf', str(rate)))
         return self
 
     def Preset(self, preset: str) -> VideoObj:
