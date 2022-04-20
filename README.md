@@ -4,7 +4,7 @@ A basic wrapper library for the ffmpeg CLI tool.
 ## Example
 
 
-This is a very basic example taking an input file (filename.mkv), selecting the streams for use, setting codec information, and finally running the command producing the output file (test.mkv).
+This is a very basic example taking an input file (`filename.mkv`), selecting the streams for use, setting codec information, and finally running the command producing the output file (`test.mkv`).
 ```python
 from pymv import Pymv
 
