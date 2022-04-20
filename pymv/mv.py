@@ -14,6 +14,7 @@ from .subtitleobj import SubtitleObj
 from .metadataobj import MetadataObj
 from .optionsobj import OptionsObj
 from .baseobj import BaseObj
+from .inputobj import InputObj
 
 class Mv(CommandBuilder, BaseObj, MetadataObj):
     def __init__(self, ffmpeg_path="ffmpeg", ffprobe_path="ffprobe"):
@@ -27,8 +28,8 @@ class Mv(CommandBuilder, BaseObj, MetadataObj):
         self.Metadata: MetadataObj = MetadataObj(self)
         self.Options: OptionsObj = OptionsObj(self)
 
-    def Input(self, filename: str) -> Mv:
-        self.inputs.append(filename)
+    def Input(self, input: str, format:str=None, offset:str=None, scale:str=None, pix_fmt:str=None) -> Mv:
+        self.inputs.append(InputObj(input, format=format, offset=offset, scale=scale, pix_fmt=pix_fmt))
         return self
 
     def Output(self, filename: str) -> Mv:
