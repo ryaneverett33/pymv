@@ -17,7 +17,7 @@ class MetadataObj:
         return self.Set('language', lang, stream_specifier=stream_specifier)
 
     def Set(self, field: str, value: str, stream_specifier: int=None) -> MetadataObj:
-        if stream_specifier != -1:
+        if stream_specifier != None:
             self.__builder.add_command((f'-metadata:s:{self._streamType.get_stream_qualifier()}:{stream_specifier}',
                                         f'{field}={value}'))
         elif self._streamType == StreamType.Unknown:

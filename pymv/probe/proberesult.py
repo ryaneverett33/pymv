@@ -28,3 +28,6 @@ class ProbeResult:
     def _parse_chapters(self, raw_chapters):
         for chapter in raw_chapters:
             self.chapters.append(ChapterResult(chapter))
+
+    def has_forced_subtitles(self) -> bool:
+        pass

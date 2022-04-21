@@ -8,8 +8,8 @@ from pymv.commandbuilder import CommandBuilder
 class VideoObj(BaseObj):
     def __init__(self, mov_obj : CommandBuilder):
         self._streamType = StreamType.Video     # Use for distinction in base class
-        
-        super().__init__(mov_obj)
+
+        super().__init__(mov_obj, stream_type=self._streamType)
 
     def Maxrate(self, rate: Union[int, str]) -> VideoObj:
         self._parent.add_command(('-maxrate', rate))

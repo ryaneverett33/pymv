@@ -8,8 +8,8 @@ from pymv.commandbuilder import CommandBuilder
 class AudioObj(BaseObj):
     def __init__(self, mov_obj: CommandBuilder):
         self._streamType = StreamType.Audio     # Use for distinction in base class
-        
-        super().__init__(mov_obj)
+
+        super().__init__(mov_obj, stream_type=self._streamType)
 
     def Channels(self, numOfChannels: int, stream_specifier: int=None) -> AudioObj:
         if stream_specifier != -1:

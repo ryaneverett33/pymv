@@ -3,8 +3,8 @@ from pymv.commandbuilder import CommandBuilder
 from pymv.metadataobj import MetadataObj
 
 class BaseObj:
-    def __init__(self, mov_obj):
-        self._streamType: StreamType = StreamType.Unknown           # Set in child class
+    def __init__(self, mov_obj: CommandBuilder, stream_type: StreamType=StreamType.Unknown):
+        self._streamType: StreamType = stream_type           # Set in child class
         self._parent: CommandBuilder = mov_obj
         
         self.Metadata: MetadataObj = MetadataObj(self._parent, streamType=self._streamType)

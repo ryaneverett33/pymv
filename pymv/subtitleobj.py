@@ -9,4 +9,4 @@ class SubtitleObj(BaseObj):
     def __init__(self, mov_obj : CommandBuilder):
         self._streamType = StreamType.Subtitle
 
-        super().__init__(mov_obj)
+        super().__init__(mov_obj, stream_type=self._streamType)
