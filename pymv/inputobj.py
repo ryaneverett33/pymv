@@ -1,8 +1,10 @@
 from typing import Tuple
 from .commandobj import CommandObj
 
+from typing import Optional
+
 class InputObj(CommandObj):
-    def __init__(self, input: str, format: str=None, offset:str=None, scale:str=None, pix_fmt:str=None):
+    def __init__(self, input: str, format: Optional[str]=None, offset: Optional[str]=None, scale: Optional[str]=None, pix_fmt: Optional[str]=None):
         # TODO handle input codec?
         super().__init__()
 

@@ -9,7 +9,7 @@ class BaseObj:
         
         self.Metadata: MetadataObj = MetadataObj(self._parent, streamType=self._streamType)
 
-    def Codec(self, *args, **kwargs):
+    def Codec(self, *args, **kwargs) -> "BaseObj":
         if self._streamType == StreamType.Unknown:
             self._parent.add_command(('-codec', args[0]))
         else:
@@ -20,7 +20,7 @@ class BaseObj:
                 self._parent.add_command((f"-{codecType}codec", args[0]))
         return self
 
-    def Bitrate(self, *args, **kwargs):
+    def Bitrate(self, *args, **kwargs) -> "BaseObj":
         codecType = self._streamType.get_stream_qualifier()
         if 'stream_specifier' in kwargs:
             self._parent.add_command((f"-b:{codecType}:{kwargs['stream_specifier']}", args[0]))

@@ -7,7 +7,7 @@ class prober():
     def __init__(self, executable: str="ffprobe"):
         self.executable: str = executable
 
-    def probe(self, filename: str):
+    def probe(self, filename: str) -> ProbeResult:
         if not os.path.isfile(filename):
             raise Exception("File does not exist")
         args = [self.executable, '-v', 'quiet', '-print_format', 'json',

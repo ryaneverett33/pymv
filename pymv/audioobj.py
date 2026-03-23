@@ -1,6 +1,4 @@
-from __future__ import annotations  # needed for -> AudioObj
-
-from typing import Union
+from typing import Optional
 from pymv.streamType import StreamType
 from pymv.baseobj import BaseObj
 from pymv.commandbuilder import CommandBuilder
@@ -11,7 +9,7 @@ class AudioObj(BaseObj):
 
         super().__init__(mov_obj, stream_type=self._streamType)
 
-    def Channels(self, numOfChannels: int, stream_specifier: int=None) -> AudioObj:
+    def Channels(self, numOfChannels: int, stream_specifier: Optional[int]=None) -> "AudioObj":
         if stream_specifier != -1:
             self._parent.add_command((f'-ac:{stream_specifier}', str(numOfChannels)))
         else:

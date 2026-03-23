@@ -1,6 +1,6 @@
 class Lookup:
     @staticmethod
-    def get_master_display(color_primaries):
+    def get_master_display(color_primaries: str):
         # see here for values: https://github.com/SK-Hardwired/nv_hevc_hdr_patcher/issues/9#issuecomment-392572348
         
         if color_primaries == "bt2020":

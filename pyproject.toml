@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pymv"
+version = "1.0.0"
+description = "A basic wrapper library for the ffmpeg CLI tool"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "GPL version 3, excluding DRM Provisions" }

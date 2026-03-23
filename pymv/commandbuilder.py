@@ -1,5 +1,5 @@
-import warnings
 import typing
+from typing import Optional
 
 from .inputobj import InputObj
 
@@ -19,15 +19,19 @@ class CommandBuilder:
                 EX: ('-i', 'input.mkv')
             initial_command: Whether the command occurs before the main arguments
         """
-        for item in arguments:
+        to_add = arguments
+        if isinstance(arguments, str):
+            to_add = [arguments]
+
+        for item in to_add:
             if not isinstance(item, str):
                 raise TypeError("Command tuple must only contain strings")
         if initial_command:
-            self.initial_commands.append(arguments)
+            self.initial_commands.append(to_add)
         else:
-            self.commands.append(arguments)
+            self.commands.append(to_add)
 
-    def _get_arguments(self):
+    def _get_arguments(self) -> list[str]:
         arguments = []
         # Error check
         if self.inputs is None:

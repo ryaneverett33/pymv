@@ -1,6 +1,5 @@
 from __future__ import annotations # needed for -> Mv
 
-import warnings
 import typing
 
 from .streamType import StreamType
@@ -16,8 +15,10 @@ from .optionsobj import OptionsObj
 from .baseobj import BaseObj
 from .inputobj import InputObj
 
+from typing import Optional
+
 class Pymv(CommandBuilder, BaseObj, MetadataObj):
-    def __init__(self, ffmpeg_path="ffmpeg", ffprobe_path="ffprobe"):
+    def __init__(self, ffmpeg_path: str="ffmpeg", ffprobe_path: str="ffprobe"):
         CommandBuilder.__init__(self, ffmpeg_path=ffmpeg_path, ffprobe_path=ffprobe_path)
         BaseObj.__init__(self, self)
         self.Probe: prober = prober(self._ffprobe_path)
@@ -28,15 +29,15 @@ class Pymv(CommandBuilder, BaseObj, MetadataObj):
         self.Metadata: MetadataObj = MetadataObj(self)
         self.Options: OptionsObj = OptionsObj(self)
 
-    def Input(self, input: str, format:str=None, offset:str=None, scale:str=None, pix_fmt:str=None) -> Mv:
+    def Input(self, input: str, format: Optional[str]=None, offset: Optional[int]=None, scale: Optional[str]=None, pix_fmt: Optional[str]=None) -> "Pymv":
         self.inputs.append(InputObj(input, format=format, offset=offset, scale=scale, pix_fmt=pix_fmt))
         return self
 
-    def Output(self, filename: str) -> Mv:
+    def Output(self, filename: str) -> "Pymv":
         self.outputs.append(filename)
         return self
 
-    def Map(self, *args) -> Mv:
+    def Map(self, *args) -> "Pymv":
         # https://ffmpeg.org/ffmpeg-all.html#Advanced-options
         mapCommand = ""
 
@@ -54,7 +55,7 @@ class Pymv(CommandBuilder, BaseObj, MetadataObj):
         self.add_command(('-map', mapCommand))
         return self
 
-    def MapAll(self) -> Mv:
+    def MapAll(self) -> "Pymv":
         return self.Map(0)
 
     def get_command(self) -> str:
@@ -62,10 +63,9 @@ class Pymv(CommandBuilder, BaseObj, MetadataObj):
         arguments = [str(argument) for argument in arguments]
         return self._ffmpeg_path + " " + " ".join(arguments)
 
-    def print_command(self) -> Mv:
+    def print_command(self):
         print(self.get_command())
-        return self
 
-    def Run(self, capture_stdout: bool=False, capture_stderr: bool=False) -> typing.Tuple[int, str, str]:
+    def Run(self, capture_stdout: bool=False, capture_stderr: bool=False, check: bool=True) -> typing.Tuple[int, str, str]:
         run = runner(self._get_arguments(), self._ffmpeg_path)
-        return run.run(capture_stdout=capture_stdout, capture_stderr=capture_stderr)
+        return run.run(capture_stdout=capture_stdout, capture_stderr=capture_stderr, check=check)
